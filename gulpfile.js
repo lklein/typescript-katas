@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    exec = require('child_process').exec,
     typescript = require('gulp-typescript'),
     jasmine = require('gulp-jasmine'),
     runSequence = require('run-sequence');
@@ -13,18 +14,14 @@ gulp.task('compile', function(){
       .pipe(gulp.dest('./katas/built'));
 });
 
-gulp.task('test', function(){
-  gulp.src(specPattern)
-      .pipe(jasmine({
-        helpers: [
-            codePattern
-        ]
-      }));
-});
+gulp.task('startKarma', function(){
+  exec('karma start', function(err){
+    if(err) console.log(err);
+  })
+})
 
 gulp.task('default', function(){
-  runSequence('compile'/*, 'test'*/);
+  runSequence('compile', 'startKarma');
   
   gulp.watch(tsSource, ['compile']);
-  //gulp.watch(specPattern, ['test']);
 });
