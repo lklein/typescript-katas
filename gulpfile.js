@@ -20,6 +20,6 @@ gulp.task('test', function(){
 
 gulp.task('default', function(){
   runSequence('compile', 'test');
-  
+ 
   gulp.watch(tsSource, ['compile']);
 });
