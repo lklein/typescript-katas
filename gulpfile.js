@@ -1,11 +1,10 @@
 var gulp = require('gulp'),
+    exec = require('child_process').exec,
     typescript = require('gulp-typescript'),
-    jasmine = require('gulp-jasmine'),
     runSequence = require('run-sequence');
   
 var tsSource = 'katas/src/**/*.ts',
-    codePattern = 'katas/built/**/code/*.js',
-    specPattern = 'katas/built/**/spec/*Spec.js';
+    codePattern = 'katas/built/**/code/*.js';
   
 gulp.task('compile', function(){
   gulp.src(tsSource)
@@ -14,17 +13,13 @@ gulp.task('compile', function(){
 });
 
 gulp.task('test', function(){
-  gulp.src(specPattern)
-      .pipe(jasmine({
-        helpers: [
-            codePattern
-        ]
-      }));
+  exec('karma start', function(err){
+    console.log(err ? err : 'Karma server running');
+  });
 });
 
 gulp.task('default', function(){
-  runSequence('compile'/*, 'test'*/);
+  runSequence('compile', 'test');
   
   gulp.watch(tsSource, ['compile']);
-  //gulp.watch(specPattern, ['test']);
 });

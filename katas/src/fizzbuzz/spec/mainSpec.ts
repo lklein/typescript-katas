@@ -1,4 +1,4 @@
-/// <reference path="../../../../typings/main/ambient/jasmine/jasmine.d.ts" />
+/// <reference path="../../../../typings/main/ambient/jasmine/index.d.ts" />
 /// <reference path="../code/main.ts" />
 
 describe("Fizzbuzz kata (Functional Programming style)", function(){
