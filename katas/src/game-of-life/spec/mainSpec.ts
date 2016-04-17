@@ -1,5 +1,6 @@
 /// <reference path="../../../../typings/main/ambient/jasmine/index.d.ts" />
 /// <reference path="../code/cell.ts" />
+/// <reference path="../code/environment.ts" />
 /// <reference path="../code/main.ts" />
 
 describe("Game of Life kata", () => {
@@ -104,9 +105,9 @@ describe("Game of Life kata", () => {
             [new Cell(true),  new Cell(true), new Cell(false), new Cell(false)],
           ],
           
-          game = new GameOfLife(start);
+          game = new Environment(start);
           
-          expect(game.next()).toEqual(expected);
+          expect(game.nextDay()).toEqual(expected);
     })
   })
     
